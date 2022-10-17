@@ -1,4 +1,5 @@
-﻿using ConfigureIocSample.Extensions;
+﻿using ConfigureIocSample.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ConfigureIocSample;
 
@@ -15,9 +16,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+		builder.Services.AddSingleton<IMauiInitializeService>(new IocConfigurationService());
+
 
 		builder.Services.AddTransient<MainViewModel>();
 
-		return builder.Build().ConfigureIoc();
+		return builder.Build();
 	}	
 }
